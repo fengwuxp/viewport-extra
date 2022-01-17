@@ -1,4 +1,11 @@
+
+
 describe('about src/index.ts', () => {
+  const retainOneBitPrecision = (num: number): number => {
+    // hack * 10 后向下取整，使用更小的缩放值，
+    return Math.floor(num * 10) / 10
+  }
+
   test('activation by importing module in document that has no viewport meta element', async () => {
     // Set clientWidth to document
     const documentClientWidth = 320
@@ -47,7 +54,7 @@ describe('about src/index.ts', () => {
     const contentAttributeValue = viewportElement.getAttribute('content')
     expect(contentAttributeValue).toBe(
       `initial-scale=${
-        (documentClientWidth / minWidth) * initialScale
+          retainOneBitPrecision((documentClientWidth / minWidth) * initialScale)
       },width=${minWidth}`
     )
   })
@@ -80,7 +87,7 @@ describe('about src/index.ts', () => {
       ?.getAttribute('content')
     expect(contentAttributeValue).toBe(
       `initial-scale=${
-        (documentClientWidth / minWidth) * initialScale
+         retainOneBitPrecision((documentClientWidth / minWidth) * initialScale)
       },width=${minWidth}`
     )
   })
@@ -118,7 +125,7 @@ describe('about src/index.ts', () => {
     const contentAttributeValue = viewportElement.getAttribute('content')
     expect(contentAttributeValue).toBe(
       `initial-scale=${
-        (documentClientWidth / minWidth) * initialScale
+         retainOneBitPrecision((documentClientWidth / minWidth) * initialScale)
       },width=${minWidth}`
     )
   })
@@ -145,7 +152,7 @@ describe('about src/index.ts', () => {
       ?.getAttribute('content')
     expect(contentAttributeValue).toBe(
       `initial-scale=${
-        (documentClientWidth / minWidth) * initialScale
+         retainOneBitPrecision((documentClientWidth / minWidth) * initialScale)
       },width=${minWidth}`
     )
   })
@@ -233,7 +240,7 @@ describe('about src/index.ts', () => {
       ?.getAttribute('content')
     expect(contentAttributeValue).toBe(
       `initial-scale=${
-        (documentClientWidth / minWidth) * initialScale
+         retainOneBitPrecision((documentClientWidth / minWidth) * initialScale)
       },width=${minWidth}`
     )
   })
@@ -421,7 +428,7 @@ describe('about src/index.ts', () => {
     const contentAttributeValue = secondViewportElement.getAttribute('content')
     expect(contentAttributeValue).toBe(
       `initial-scale=${
-        (documentClientWidth / minWidth) * initialScale
+         retainOneBitPrecision((documentClientWidth / minWidth) * initialScale)
       },width=${minWidth}`
     )
   })

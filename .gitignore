@@ -3,3 +3,5 @@ dist/
 types/
 .types/
 .vscode/
+.idea
+package-lock.json

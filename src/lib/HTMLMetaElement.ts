@@ -27,6 +27,15 @@ export const createPartialContent = (
   return partialContent
 }
 
+/**
+ * 只保留一位小数
+ * @param num
+ */
+const retainOneBitPrecision = (num: number): number => {
+  // hack * 10 后向下取整，使用更小的缩放值，
+  return Math.floor(num * 10) / 10
+}
+
 export const applyContent = (
   htmlMetaElement: HTMLMetaElement,
   content: Content,
@@ -47,13 +56,17 @@ export const applyContent = (
     )
   } else if (documentClientWidth < minWidth) {
     omittedContent.width = minWidth
-    omittedContent.initialScale =
+    omittedContent.initialScale = retainOneBitPrecision(
       (documentClientWidth / minWidth) * initialScale
+    )
   } else if (documentClientWidth > maxWidth) {
     omittedContent.width = maxWidth
-    omittedContent.initialScale =
+    omittedContent.initialScale = retainOneBitPrecision(
       (documentClientWidth / maxWidth) * initialScale
+    )
   }
+  omittedContent.maximumScale = omittedContent.initialScale
+  omittedContent.minimumScale = omittedContent.initialScale
   // Stringify Content
   const contentAttributeValue = Object.keys(omittedContent)
     .map(key => `${kebabize(key)}=${omittedContent[key]}`)
